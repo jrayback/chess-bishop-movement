@@ -6,9 +6,13 @@ Quick implementation of chess moves problem with bishop.
 
 I implemented using a TDD approach. I use eslint to enforce JavaScript Standard style.
 
+## Dependencies
+
+Built using Node v10.8.0.
+
 ## Installing
 
-Run NPM to install dependencies.
+Assuming you have Node installed. Run NPM to install dependencies.
 
 ```
 npm install
