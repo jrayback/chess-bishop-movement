@@ -19,52 +19,50 @@ function getActual (originSquare, destinationSquare) {
   return algorithm.numChessMovesBishop(originSquare, destinationSquare)
 }
 
-describe('[Number of Chess Moves Tests]', function () {
-  it('Should throw a range error if the passed in number for either square is out of range', function () {
+// engine to check range errors
+function checkRange (originSquare, destinationSquare) {
+  let message = `Should throw a range error when sent ${originSquare} and ${destinationSquare}`
+  it(message, function () {
+    expect(function () {
+      algorithm.numChessMovesBishop(originSquare, destinationSquare)
+    }).to.throw(RangeError)
+  })
+}
+
+// engine to check two squares vs. expected result
+function checkMove (originSquare, destinationSquare, expected) {
+  let message = `Should return ${expected} when sent ${originSquare} and ${destinationSquare}`
+  it(message, function () {
+    let actual = getActual(originSquare, destinationSquare)
+    expect(actual).to.equal(expected)
+  })
+}
+
+describe('[Number of Bishop Chess Moves Tests]', function () {
+  describe('Out of range:', function () {
     // try both ways
-    expect(function () {
-      algorithm.numChessMovesBishop(104, 0)
-    }).to.throw(RangeError)
-    expect(function () {
-      algorithm.numChessMovesBishop(0, 203)
-    }).to.throw(RangeError)
+    checkRange(104, 0)
+    checkRange(0, 203)
   })
-  it('Should return 0 when sent identical squares', function () {
-    const originSquare = 1
-    const destinationSquare = 1
-    const expected = 0
-    const actual = getActual(originSquare, destinationSquare)
-    expect(actual).to.equal(expected)
+  describe('Identical squares:', function () {
+    checkMove(1, 1, 0)
   })
-  it('Should return 1 when the destination square is directly diagonal from the origin square', function () {
-    const expected = 1
-    let actual
-    // Try several iterations of diagonal moves in different lengths and directions
-    actual = getActual(0, 9)
-    expect(actual).to.equal(expected)
-    actual = getActual(21, 3)
-    expect(actual).to.equal(expected)
-    actual = getActual(31, 59)
-    expect(actual).to.equal(expected)
-    actual = getActual(25, 4)
-    expect(actual).to.equal(expected)
+  describe('Directly diagonal move:', function () {
+    // try various combinations
+    checkMove(0, 9, 1)
+    checkMove(21, 3, 1)
+    checkMove(31, 59, 1)
+    checkMove(25, 4, 1)
   })
-  it('Should return -1 if the destination square is an opposite color from the origin square', function () {
-    const expected = -1
-    let actual
-    // test a few just to be sure
-    actual = getActual(0, 7)
-    expect(actual).to.equal(expected)
-    actual = getActual(0, 62)
-    expect(actual).to.equal(expected)
-    actual = getActual(56, 54)
-    expect(actual).to.equal(expected)
+  describe('Opposite colors:', function () {
+    // try various combinations
+    checkMove(0, 7, -1)
+    checkMove(0, 62, -1)
+    checkMove(56, 54, -1)
   })
-  it('Should return 2 in any case other than squares directly diagonal or squares of opposite color', function () {
-    const originSquare = 0
-    const destinationSquare = 11
-    const expected = 2
-    const actual = getActual(originSquare, destinationSquare)
-    expect(actual).to.equal(expected)
+  describe('All other moves:', function () {
+    // try various combinations
+    checkMove(0, 11, 2)
+    checkMove(48, 59, 2)
   })
 })
