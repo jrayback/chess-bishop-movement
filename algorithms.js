@@ -1,9 +1,3 @@
-// test algorithm for verifying plumbing
-module.exports.returnGreeting = () => {
-  const greeting = 'hello world!'
-  return greeting
-}
-
 // chess move algorithms
 const BOARD_WIDTH = 8 // defines the width and length of a chess board in squares
 

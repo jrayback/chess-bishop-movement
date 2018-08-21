@@ -2,18 +2,6 @@
 const expect = require('chai').expect
 const algorithm = require('../algorithms')
 
-// verify mocha is working and that basic plumbing into algorithm module is working
-describe('[Baseline Tests]', function () {
-  it('Should equal true when comparing true to true', function () {
-    expect(true).to.equal(true)
-  })
-  it('Should return expected test greeting', function () {
-    const expected = 'hello world!'
-    const actual = algorithm.returnGreeting()
-    expect(actual).to.equal(expected)
-  })
-})
-
 // tests for chess moves algorithms
 function getActual (originSquare, destinationSquare) {
   return algorithm.numChessMovesBishop(originSquare, destinationSquare)
