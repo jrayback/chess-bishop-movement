@@ -33,7 +33,7 @@ function determineRow (square) {
 
 // calculate the column from square alone
 function determineColumn (square) {
-  return (square < BOARD_WIDTH) ? square : square - BOARD_WIDTH
+  return square % BOARD_WIDTH
 }
 
 // check to see if the square is out of range
