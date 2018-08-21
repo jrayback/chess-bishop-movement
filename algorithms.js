@@ -44,10 +44,10 @@ function isOutOfRange (square) {
 module.exports.numChessMovesBishop = (originSquare, destinationSquare) => {
   if (isOutOfRange(originSquare) || isOutOfRange(destinationSquare)) {
     throw new RangeError('Squares must be numbered 0 - 63')
-  } else if (originSquare === destinationSquare) {
-    return 0
   } else if (areOppositeColors(originSquare, destinationSquare)) {
     return -1
+  } else if (originSquare === destinationSquare) {
+    return 0
   } else if (areDiagonal(originSquare, destinationSquare)) {
     return 1
   } else {
