@@ -1,23 +1,33 @@
 // chess move algorithms
 const BOARD_WIDTH = 8 // defines the width and length of a chess board in squares
 
-// This actually works great to determine diagonality in both directions,
-// don't need to convert to x/y coordinates at all for this...
+function locateSquare (square) {
+  return {
+    row: determineRow(square),
+    column: determineColumn(square)
+  }
+}
+
+// Determine if the squares are diagonal
 function areDiagonal (originSquare, destinationSquare) {
-  return ((originSquare - destinationSquare) % (BOARD_WIDTH + 1) === 0 ||
-          (originSquare - destinationSquare) % (BOARD_WIDTH - 1) === 0)
+  let oSquare = locateSquare(originSquare)
+  let dSquare = locateSquare(destinationSquare)
+
+  // This determines diagonality,
+  // return false if squares are the same
+  return (originSquare !== destinationSquare) &&
+          (Math.abs(oSquare.row - dSquare.row) === Math.abs(oSquare.column - dSquare.column))
 }
 
 // By getting row and column, the color of the squares can be determined
 function areOppositeColors (originSquare, destinationSquare) {
-  let originRow = determineRow(originSquare)
-  let originColumn = determineColumn(originSquare)
-  let destinationRow = determineRow(destinationSquare)
-  let destinationColumn = determineColumn(destinationSquare)
+  let oSquare = locateSquare(originSquare)
+  let dSquare = locateSquare(destinationSquare)
+
   // Check the difference between row and column.
   // If both are odd or both are even, they are the same color.
   // Otherwise they are not.
-  return ((originRow - originColumn) % 2) !== ((destinationRow - destinationColumn) % 2)
+  return Math.abs(oSquare.row - oSquare.column) % 2 !== Math.abs(dSquare.row - dSquare.column) % 2
 }
 
 // calculate the row from square alone
@@ -38,12 +48,12 @@ function isOutOfRange (square) {
 module.exports.numChessMovesBishop = (originSquare, destinationSquare) => {
   if (isOutOfRange(originSquare) || isOutOfRange(destinationSquare)) {
     throw new RangeError('Squares must be numbered 0 - 63')
+  } else if (areDiagonal(originSquare, destinationSquare)) {
+    return 1
   } else if (areOppositeColors(originSquare, destinationSquare)) {
     return -1
   } else if (originSquare === destinationSquare) {
     return 0
-  } else if (areDiagonal(originSquare, destinationSquare)) {
-    return 1
   } else {
     return 2
   }

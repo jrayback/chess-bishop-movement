@@ -47,10 +47,12 @@ describe('[Number of Bishop Chess Moves Tests]', function () {
     checkMove(0, 7, -1)
     checkMove(0, 62, -1)
     checkMove(56, 54, -1)
+    checkMove(16, 7, -1)
   })
   describe('All other moves:', function () {
     // try various combinations
     checkMove(0, 11, 2)
     checkMove(48, 59, 2)
+    checkMove(1, 60, 2)
   })
 })
