@@ -1,11 +1,11 @@
 // chess move algorithms
 const BOARD_WIDTH = 8 // defines the width and length of a chess board in squares
 
-// create and return a square object based on squareNumber
-function locateSquare (squareNumber) {
-  return {
-    row: determineRow(squareNumber),
-    column: determineColumn(squareNumber)
+// struct used to represent a square with row and column values
+class Square {
+  constructor (squareNumber) {
+    this.row = determineRow(squareNumber)
+    this.column = determineColumn(squareNumber)
   }
 }
 
@@ -48,8 +48,8 @@ function areOppositeColors (originSquare, destinationSquare) {
 // Main function. Used to determine number of chess moves it takes a bishop
 // to go from origin square to destination square (numbered 0 - 63)
 module.exports.numChessMovesBishop = (originNumber, destinationNumber) => {
-  let originSquare = locateSquare(originNumber)
-  let destinationSquare = locateSquare(destinationNumber)
+  let originSquare = new Square(originNumber)
+  let destinationSquare = new Square(destinationNumber)
   if (isOutOfRange(originNumber) || isOutOfRange(destinationNumber)) {
     throw new RangeError('Squares must be numbered 0 - 63')
   } else if (areDiagonal(originSquare, destinationSquare)) {
