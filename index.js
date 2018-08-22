@@ -1,7 +1,5 @@
 const algorithms = require('./algorithms')
 
-console.log(algorithms.returnGreeting() + '\n')
-
 const messages = [
   'This move cannot be made!',
   'The piece is already on this square...',
