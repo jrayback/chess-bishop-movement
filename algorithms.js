@@ -8,14 +8,15 @@ function locateSquare (square) {
   }
 }
 
-// Determine if the squares are diagonal
-function areDiagonal (originSquare, destinationSquare) {
-  let oSquare = locateSquare(originSquare)
-  let dSquare = locateSquare(destinationSquare)
+function areSameSquare (square1, square2) {
+  return square1.row === square2.row && square1.column === square2.column
+}
 
+// Determine if the squares are diagonal
+function areDiagonal (oSquare, dSquare) {
   // This determines diagonality,
   // return false if squares are the same
-  return (originSquare !== destinationSquare) &&
+  return (!areSameSquare(oSquare, dSquare)) &&
           (Math.abs(oSquare.row - dSquare.row) === Math.abs(oSquare.column - dSquare.column))
 }
 
@@ -47,7 +48,7 @@ module.exports.numChessMovesBishop = (originSquare, destinationSquare) => {
   let dSquare = locateSquare(destinationSquare)
   if (isOutOfRange(originSquare) || isOutOfRange(destinationSquare)) {
     throw new RangeError('Squares must be numbered 0 - 63')
-  } else if (areDiagonal(originSquare, destinationSquare)) {
+  } else if (areDiagonal(oSquare, dSquare)) {
     return 1
   } else if (areOppositeColors(oSquare, dSquare)) {
     return -1
