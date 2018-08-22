@@ -56,7 +56,7 @@ module.exports.numChessMovesBishop = (originNumber, destinationNumber) => {
     return 1
   } else if (areOppositeColors(originSquare, destinationSquare)) {
     return -1
-  } else if (originNumber === destinationNumber) {
+  } else if (areSameSquare(originSquare, destinationSquare)) {
     return 0
   } else {
     return 2
