@@ -9,6 +9,21 @@ function locateSquare (squareNumber) {
   }
 }
 
+// calculate the row from square number alone
+function determineRow (squareNumber) {
+  return Math.floor(squareNumber / BOARD_WIDTH)
+}
+
+// calculate the column from square number alone
+function determineColumn (squareNumber) {
+  return squareNumber % BOARD_WIDTH
+}
+
+// check to see if the square number is out of range
+function isOutOfRange (squareNumber) {
+  return squareNumber < 0 || squareNumber > (BOARD_WIDTH * BOARD_WIDTH) - 1
+}
+
 // checks two square objects and returns true if they are the same square
 function areSameSquare (square1, square2) {
   return square1.row === square2.row && square1.column === square2.column
@@ -28,21 +43,6 @@ function areOppositeColors (originSquare, destinationSquare) {
   // If both are odd or both are even, they are the same color.
   // Otherwise they are not.
   return Math.abs(originSquare.row - originSquare.column) % 2 !== Math.abs(destinationSquare.row - destinationSquare.column) % 2
-}
-
-// calculate the row from square number alone
-function determineRow (squareNumber) {
-  return Math.floor(squareNumber / BOARD_WIDTH)
-}
-
-// calculate the column from square number alone
-function determineColumn (squareNumber) {
-  return squareNumber % BOARD_WIDTH
-}
-
-// check to see if the square number is out of range
-function isOutOfRange (squareNumber) {
-  return squareNumber < 0 || squareNumber > (BOARD_WIDTH * BOARD_WIDTH) - 1
 }
 
 // Main function. Used to determine number of chess moves it takes a bishop
