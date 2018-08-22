@@ -20,10 +20,7 @@ function areDiagonal (originSquare, destinationSquare) {
 }
 
 // By getting row and column, the color of the squares can be determined
-function areOppositeColors (originSquare, destinationSquare) {
-  let oSquare = locateSquare(originSquare)
-  let dSquare = locateSquare(destinationSquare)
-
+function areOppositeColors (oSquare, dSquare) {
   // Check the difference between row and column.
   // If both are odd or both are even, they are the same color.
   // Otherwise they are not.
@@ -46,11 +43,13 @@ function isOutOfRange (square) {
 }
 
 module.exports.numChessMovesBishop = (originSquare, destinationSquare) => {
+  let oSquare = locateSquare(originSquare)
+  let dSquare = locateSquare(destinationSquare)
   if (isOutOfRange(originSquare) || isOutOfRange(destinationSquare)) {
     throw new RangeError('Squares must be numbered 0 - 63')
   } else if (areDiagonal(originSquare, destinationSquare)) {
     return 1
-  } else if (areOppositeColors(originSquare, destinationSquare)) {
+  } else if (areOppositeColors(oSquare, dSquare)) {
     return -1
   } else if (originSquare === destinationSquare) {
     return 0
